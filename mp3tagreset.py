@@ -41,8 +41,6 @@ Author: Lev Orekhov
         lev.orekhov@gmail.com
 """
 
- 
-
 try:
     import eyeD3
 except:
@@ -56,7 +54,7 @@ def printOutput(message):
         print message
 
 def processDir(dir):
-    def changeTag():
+    def processEntry():
         tag = eyeD3.Tag()
         try:
             if not tag.link(fullpath):
@@ -69,12 +67,15 @@ def processDir(dir):
         tag.setTitle(newTitle)
         tag.update()
         printOutput("%s: updated, new title is %s" % (fullpath, newTitle))
-
-    for entry in os.listdir(dir):
+    if os.path.isfile(dir):
+        entriesList = [dir]
+    else:
+        entriesList = os.listdir(dir) 
+    for entry in entriesList:
         fullpath = os.path.join(dir, entry)
         if (os.path.isfile(fullpath) 
             and eyeD3.isMp3File(fullpath)):
-            changeTag()
+            processEntry()
         elif os.path.isdir(fullpath):
             processDir(fullpath)
         else:
@@ -95,7 +96,7 @@ def run():
             globals()['is_verbose'] = True
         elif arg == '--version':
             print version
-        elif os.path.isdir(arg):
+        elif os.path.isdir(arg) or os.path.isfile(arg):
             root_dirs.append(arg)
         else:
             print "Invalid argument '",str(arg),"' It's not a directory.\n Try ",sys.argv[0], " --usage"
