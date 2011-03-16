@@ -1,0 +1,29 @@
+Tool for resetting mp3 tags.
+Purpose: 
+Some mp3 players (many of them), sort music by tag:Title (or other), so, if you're 
+want to listen an audio book, you've got a problem.
+
+Usage:
+Tool is automaticly scans directories from given recursively, and resets mp3 tag to declared.
+
+mp3tagreset [OPTION...] [DIR...]
+as DIR param mp3tagreset can receive multiple directories with space separator
+
+Examples:
+    mp3tagreset -v /home/username/mp3/Hyperion
+    
+Options:
+    -v                       verbose mode
+    -a                       resets all tag
+    -i                       print object info (name and tags)
+    --tag=TAGNAME            resets specified tag (Title, Artist, Album)
+    --value=VALUE            resets tag(s) to given value (FILENAME, INCREMENT, BLANK or custom value in quotes
+
+Other options:
+  -?, --help                 give this help list
+      --usage                give a short usage message
+      --version              print program version
+      
+Version 0.1
+Author: Lev Orekhov
+        lev.orekhov@gmail.com
